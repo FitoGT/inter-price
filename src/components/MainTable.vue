@@ -1,12 +1,13 @@
 <template>
   <div>
     <ul class="main-table" v-for="item, key of filterItem" :key="key">
-      <li @click="showSubTable(`subtable-${item.Company}`)">
+      <li @click="showSubTable(`subtable-${item.Company}`)"
+        :class="show(`subtable-${item.Company}`) ? 'open-li' : 'close-li'">
         <span v-if="item.DateSent"> {{ item.DateSent }} </span>
         <span> {{ item.Company }} </span>
       </li>
       <div v-if="item.Quote">
-        <sub-table v-show="`subtable-${item.Company}`== show" :key="`subtable-${item.Company}`" :quotes="item.Quote"
+        <sub-table v-show="show(`subtable-${item.Company}`)" :key="`subtable-${item.Company}`" :quotes="item.Quote"
           :filters="filters" />
       </div>
     </ul>
@@ -33,7 +34,7 @@ export default {
   },
   data() {
     return {
-      show: ''
+      showElements: []
     }
   },
   computed: {
@@ -47,7 +48,18 @@ export default {
   },
   methods: {
     showSubTable(key) {
-      this.show = key
+      if (this.showElements.includes(key)) {
+        const index = this.showElements.indexOf(key);
+        if (index > -1) {
+          this.showElements.splice(index, 1);
+        }
+      } else {
+        this.showElements.push(key)
+
+      }
+    },
+    show(key) {
+      return this.showElements.includes(key)
     }
   }
 }
@@ -64,8 +76,13 @@ export default {
   border-right: 1px solid #eee;
 }
 
-.main-table li::before {
-  content: '▶';
+.main-table .close-li::before {
+  content: '▲';
+  left: 0;
+}
+
+.open-li::before {
+  content: '▼';
   left: 0;
 }
 </style>
