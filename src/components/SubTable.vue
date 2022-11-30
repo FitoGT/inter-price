@@ -20,7 +20,6 @@ export default {
       default: () => []
     },
   },
-
   computed: {
     filteredQuotes() {
       let results = this.quotes
