@@ -11,6 +11,7 @@
     <div class="row">
       <company-filter @setFilterData="setFilterData($event)" />
     </div>
+    {{ filterItems }}
   </div>
 </template>
 
@@ -73,6 +74,16 @@ export default {
       years = [...new Set(years)]
       years = years.sort(function (a, b) { return a - b; });
       return years
+    },
+    filterItems() {
+      let results = this.items
+      if (this.filters.company) {
+        results = results.filter(i => i.Company.toLowerCase() == this.filters.company.toLowerCase())
+      }
+
+
+      return results
+
     }
   }
 }
