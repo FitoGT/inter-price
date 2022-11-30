@@ -3,15 +3,17 @@
     <div class="row">
       <quote-filters @setFilterData="setFilterData($event)" key="currency-filter" :filters="getCurrencies"
         type="currency" :input="'radio'" />
-      <quote-filters @setFilterData="setFilterData($event)" key="years-filter" :filters="getYears" type="years"
-        :input="'checkbox'" />
+      <quote-filters v-if="filters.currency" @setFilterData="setFilterData($event)" key="years-filter"
+        :filters="getYears" type="years" :input="'checkbox'" />
       <quote-filters @setFilterData="setFilterData($event)" key="display-filter" :filters="display" type="display"
         :input="'radio'" />
     </div>
     <div class="row">
       <company-filter @setFilterData="setFilterData($event)" />
     </div>
-    {{ filterItems }}
+    <div class="row">
+      <main-table :filters="filters" :items="items" />
+    </div>
   </div>
 </template>
 
@@ -19,12 +21,14 @@
 import json from '@/assets/data.json'
 import QuoteFilters from './QuoteFilters'
 import CompanyFilter from './CompanyFilter'
+import MainTable from './MainTable'
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Container',
   components: {
     QuoteFilters,
-    CompanyFilter
+    CompanyFilter,
+    MainTable
   },
   props: {
     msg: String
@@ -67,24 +71,17 @@ export default {
         let quotes = element.Quote
         if (quotes) {
           quotes.forEach(quote => {
-            years.push(quote.Years)
+            if (quote.Currency === this.filters.currency) {
+              years.push(quote.Years)
+            }
           })
         }
       });
       years = [...new Set(years)]
       years = years.sort(function (a, b) { return a - b; });
       return years
-    },
-    filterItems() {
-      let results = this.items
-      if (this.filters.company) {
-        results = results.filter(i => i.Company.toLowerCase() == this.filters.company.toLowerCase())
-      }
-
-
-      return results
-
     }
+
   }
 }
 </script>
