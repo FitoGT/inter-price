@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul class="main-ul" v-for="item, key of filterItem" :key="key">
+    <ul class="main-table" v-for="item, key of filterItem" :key="key">
       <li>
-        <span> {{ item.DateSent }} </span>
+        <span v-if="item.DateSent"> {{ item.DateSent }} </span>
         <span> {{ item.Company }} </span>
       </li>
       <div v-if="item.Quote">
@@ -41,3 +41,15 @@ export default {
   }
 }
 </script>
+<style scoped>
+.main-table li {
+  list-style: none;
+  padding: 5px 10px;
+  border: 1px solid #eee;
+}
+
+.main-table li span:first-child {
+  padding: 5px 10px;
+  border-right: 1px solid #eee;
+}
+</style>

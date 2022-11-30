@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="subtable-table">
     <li v-for="quote, key of filteredQuotes" :key="`quote-${key}`">
       <span v-for="data, key of quote" :key="key">
         <span>{{ key }} : {{ data }} </span>
@@ -35,3 +35,15 @@ export default {
   }
 }
 </script>
+<style>
+.subtable-table li {
+  list-style: none;
+  padding: 5px 10px;
+  border: 1px solid #eee;
+}
+
+.subtable-table li span span:first-child {
+  padding: 5px 10px;
+  border-right: 1px solid #eee;
+}
+</style>

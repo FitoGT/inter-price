@@ -2,8 +2,8 @@
   <div class="col-4">
     <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default">Company</span>
-      <input type="text" class="form-control" v-model="company">
-      <button @click="setFilterData" class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+      <input @keyup.enter="setFilterData" type="text" class="form-control" v-model="company">
+      <button @click="setFilterData" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
     </div>
   </div>
 </template>

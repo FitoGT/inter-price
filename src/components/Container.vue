@@ -1,6 +1,6 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
+  <div class="container mt-5">
+    <div class="row mb-3">
       <quote-filters @setFilterData="setFilterData($event)" key="currency-filter" :filters="getCurrencies"
         type="currency" :input="'radio'" />
       <quote-filters v-if="filters.currency" @setFilterData="setFilterData($event)" key="years-filter"
@@ -85,3 +85,6 @@ export default {
   }
 }
 </script>
+<style>
+
+</style>
