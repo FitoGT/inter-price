@@ -1,14 +1,15 @@
 <template>
   <div class="container-fluid">
-    <div>
-      <h1>{{ msg }}</h1>
+    <div class="row">
       <quote-filters @setFilterData="setFilterData($event)" key="currency-filter" :filters="getCurrencies"
         type="currency" :input="'radio'" />
       <quote-filters @setFilterData="setFilterData($event)" key="years-filter" :filters="getYears" type="years"
         :input="'checkbox'" />
       <quote-filters @setFilterData="setFilterData($event)" key="display-filter" :filters="display" type="display"
         :input="'radio'" />
-
+    </div>
+    <div class="row">
+      <company-filter @setFilterData="setFilterData($event)" />
     </div>
   </div>
 </template>
@@ -16,11 +17,13 @@
 <script>
 import json from '@/assets/data.json'
 import QuoteFilters from './QuoteFilters'
+import CompanyFilter from './CompanyFilter'
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Container',
   components: {
-    QuoteFilters
+    QuoteFilters,
+    CompanyFilter
   },
   props: {
     msg: String

@@ -1,9 +1,11 @@
 <template>
-  <div class="btn-group btn-group-toggle">
-    <div v-for="filter, key of filters" :key="`${key}-${type}`">
-      <input @change="setFilterData" v-model="selected" :type="input" :name="`${key}-${type}`" :id="`${key}-${type}`"
-        autocomplete="off" :value="filter" class="btn-check">
-      <label class="btn btn-primary" :for="`${key}-${type}`">{{ filter }}</label>
+  <div class="col-2">
+    <div class="btn-group btn-group-toggle">
+      <div v-for="filter, key of filters" :key="`${key}-${type}`">
+        <input @change="setFilterData" v-model="selected" :type="input" :name="`${key}-${type}`" :id="`${key}-${type}`"
+          autocomplete="off" :value="filter" class="btn-check">
+        <label class="btn btn-primary" :for="`${key}-${type}`">{{ filter }}</label>
+      </div>
     </div>
   </div>
 </template>
