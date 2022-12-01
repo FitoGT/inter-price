@@ -3,7 +3,7 @@
     <ul class="main-table" v-for="item, key of filterItem" :key="key">
       <li @click="showSubTable(`subtable-${item.Company}`)"
         :class="show(`subtable-${item.Company}`) ? 'open-li' : 'close-li'">
-        <span v-if="item.DateSent"> {{ item.DateSent }} </span>
+        <span v-if="item.DateSent"> {{ parseDate(item.DateSent) }} </span>
         <span> {{ item.Company }} </span>
       </li>
       <div v-if="item.Quote">
@@ -11,11 +11,20 @@
           :filters="filters" />
       </div>
     </ul>
+    <ul class="main-table">
+      <li>
+        <span> Amount by </span>
+        <span> Spread : </span>
+        <span> Yield : </span>
+        <span> 3MLSpread : </span>
+      </li>
+    </ul>
   </div>
 
 </template>
 
 <script>
+import moment from 'moment';
 import SubTable from './SubTable'
 export default {
   components: {
@@ -47,6 +56,9 @@ export default {
     }
   },
   methods: {
+    parseDate(date) {
+      return moment(date).format("DD-MMM-YYYY")
+    },
     showSubTable(key) {
       if (this.showElements.includes(key)) {
         const index = this.showElements.indexOf(key);

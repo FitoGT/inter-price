@@ -61,6 +61,10 @@ export default {
 }
 </script>
 <style>
+.subtable-table {
+  padding: 0
+}
+
 .subtable-table li {
   list-style: none;
   padding: 5px 10px;

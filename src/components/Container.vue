@@ -47,11 +47,17 @@ export default {
       componentKey: 0
     }
   },
+  created() {
+    this.sortItems()
+  },
   methods: {
     setFilterData(e) {
       this.componentKey = +1
       this.filters.years = null
       this.filters[e.key] = e.filter
+    },
+    sortItems() {
+      this.items = this.items.sort((a, b) => a.Preferred - b.Preferred)
     }
   },
   computed: {
