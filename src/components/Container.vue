@@ -1,12 +1,12 @@
 <template>
   <div class="container mt-5">
     <div class="row mb-3">
-      <quote-filters @setFilterData="setFilterData($event)" key="currency-filter" :filters="getCurrencies"
-        type="currency" :input="'radio'" />
-      <quote-filters v-if="filters.currency" @setFilterData="setFilterData($event)" key="years-filter"
-        :filters="getYears" type="years" :input="'checkbox'" />
-      <quote-filters @setFilterData="setFilterData($event)" key="display-filter" :filters="display" type="display"
-        :input="'radio'" />
+      <quote-filters @setFilterData="setFilterData($event)" :key="`currency-filter-${componentKey}`"
+        :filters="getCurrencies" type="currency" :input="'radio'" />
+      <quote-filters v-if="filters.currency" @setFilterData="setFilterData($event)"
+        :key="`years-filter-${componentKey}`" :filters="getYears" type="years" :input="'checkbox'" />
+      <quote-filters @setFilterData="setFilterData($event)" :key="`display-filter-${componentKey}`" :filters="display"
+        type="display" :input="'radio'" />
     </div>
     <div class="row">
       <company-filter @setFilterData="setFilterData($event)" />
@@ -43,11 +43,13 @@ export default {
         currency: null,
         years: null,
         display: null
-      }
+      },
+      componentKey: 0
     }
   },
   methods: {
     setFilterData(e) {
+      this.componentKey = +1
       this.filters[e.key] = e.filter
     }
   },

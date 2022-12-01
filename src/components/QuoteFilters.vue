@@ -35,7 +35,7 @@ export default {
     setFilterData() {
       this.$emit('setFilterData', {
         key: this.type,
-        filter: this.selected
+        filter: this.selected.length ? this.selected : null
       })
     }
   }
