@@ -2,7 +2,7 @@
   <ul class="subtable-table">
     <li v-for="quote, key of filteredQuotes" :key="`quote-${key}`">
       <span v-for="data, key of quote" :key="key">
-        <span>{{ key }} : {{ data }} </span>
+        <span v-show="showQuoteElements.includes(key)">{{ key }} : {{ data }} </span>
       </span>
     </li>
   </ul>
@@ -20,6 +20,11 @@ export default {
       default: () => []
     },
   },
+  data() {
+    return {
+      showQuoteElements: ['Amount', 'CouponType', 'Currency', 'Years', '3MLSpread', 'Spread', 'Yield']
+    }
+  },
   computed: {
     filteredQuotes() {
       let results = this.quotes
@@ -30,6 +35,27 @@ export default {
         results = results.filter(result => this.filters.years.includes(result.Years))
       }
       return results
+    }
+  },
+  watch: {
+    filters: {
+      deep: true,
+      handler: function (filter) {
+        if (filter.display) {
+          this.showQuoteElements.push(filter.display)
+          switch (filter.display) {
+            case '3MLSpread':
+              this.showQuoteElements = this.showQuoteElements.filter(show => show !== 'Spread' && show !== 'Yield')
+              break;
+            case 'Yield':
+              this.showQuoteElements = this.showQuoteElements.filter(show => show !== 'Spread' && show !== '3MLSpread')
+              break;
+            case 'Spread':
+              this.showQuoteElements = this.showQuoteElements.filter(show => show !== 'Yield' && show !== '3MLSpread')
+              break;
+          }
+        }
+      }
     }
   }
 }
