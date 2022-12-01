@@ -14,9 +14,7 @@
     <ul class="main-table">
       <li>
         <span> Amount by </span>
-        <span> Spread : </span>
-        <span> Yield : </span>
-        <span> 3MLSpread : </span>
+        <span v-for="amount of showAmounts" :key="amount"> {{ amount }} : {{ amountCalculation[amount] }}</span>
       </li>
     </ul>
   </div>
@@ -43,7 +41,8 @@ export default {
   },
   data() {
     return {
-      showElements: []
+      showElements: [],
+      showAmounts: ['3MLSpread', 'Spread', 'Yield']
     }
   },
   computed: {
@@ -53,6 +52,20 @@ export default {
         results = results.filter(i => i.Company.toLowerCase() == this.filters.company.toLowerCase())
       }
       return results
+    },
+    amountCalculation() {
+      let quoteArray = this.filterItem.map(i => i.Quote).filter(i => i).flat()
+      let amounts = {
+        "Spread": 0,
+        "Yield": 0,
+        "3MLSpread": 0
+      }
+      for (const key in amounts) {
+        quoteArray.forEach(q => {
+          amounts[key] += q[key]
+        })
+      }
+      return amounts
     }
   },
   methods: {
