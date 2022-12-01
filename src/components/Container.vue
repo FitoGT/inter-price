@@ -50,6 +50,7 @@ export default {
   methods: {
     setFilterData(e) {
       this.componentKey = +1
+      this.filters.years = null
       this.filters[e.key] = e.filter
     }
   },
