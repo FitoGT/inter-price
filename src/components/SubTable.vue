@@ -54,6 +54,8 @@ export default {
               this.showQuoteElements = this.showQuoteElements.filter(show => show !== 'Yield' && show !== '3MLSpread')
               break;
           }
+        } else {
+          this.showQuoteElements = ['Amount', 'CouponType', 'Currency', 'Years', '3MLSpread', 'Spread', 'Yield']
         }
       }
     }

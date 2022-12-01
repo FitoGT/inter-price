@@ -14,7 +14,11 @@
     <ul class="main-table">
       <li>
         <span> Amount by </span>
-        <span v-for="amount of showAmounts" :key="amount"> {{ amount }} : {{ amountCalculation[amount] }}</span>
+        <span v-for="amount of showAmounts" :key="amount" v-show="(!filters.display || amount === filters.display)"> {{
+            amount
+        }} : {{
+    amountCalculation[amount]
+}}</span>
       </li>
     </ul>
   </div>
